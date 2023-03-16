@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Login Form</title>
+    <style>
+      #result {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Login Form</h1>
+    <form id="login-form">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+      <br>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+      <br>
+      <button type="submit">Submit</button>
+    </form>
+    <p id="result"></p>
+    <script>
+      const validCredentials = [
+        { username: "user1", password: "password1" },
+        { username: "user2", password: "password2" }
+      ];
+      const invalidCredentials = [
+        { username: "user3", password: "password3" },
+        { username: "user4", password: "password4" }
+      ];
+      const form = document.getElementById("login-form");
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        const isValidCredential = validCredentials.some(
+          (credential) =>
+            credential.username === username && credential.password === password
+        );
+        const isInvalidCredential = invalidCredentials.some(
+          (credential) =>
+            credential.username === username && credential.password === password
+        );
+        const result = document.getElementById("result");
+        if (isValidCredential) {
+          result.style.color = "green";
+          result.textContent = "You have successfully logged in!";
+        } else if (isInvalidCredential) {
+          result.style.color = "red";
+          result.textContent = "Your credentials are not valid. Please try again.";
+        } else {
+          result.style.color = "red";
+          result.textContent = "Please enter a valid username and password.";
+        }
+      });
+    </script>
+  </body>
+</html>
